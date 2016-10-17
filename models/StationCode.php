@@ -44,4 +44,10 @@ class StationCode extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+	
+	public function saveCode($data)
+	{
+		$res = Yii::$app->db->createCommand()->batchInsert(self::tableName(), ['name', 'code'], $data)->execute();
+		return $res;
+    }
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "user_help".
@@ -16,39 +17,58 @@ use Yii;
  */
 class UserHelp extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'user_help';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['uid', 'statr_station', 'end_station', 'train_no', 'seat_type'], 'required'],
-            [['uid'], 'integer'],
-            [['statr_station', 'end_station'], 'string', 'max' => 3],
-            [['train_no', 'seat_type'], 'string', 'max' => 11],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'uid' => 'Uid',
-            'statr_station' => 'Statr Station',
-            'end_station' => 'End Station',
-            'train_no' => 'Train No',
-            'seat_type' => 'Seat Type',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public static function tableName()
+	{
+		return 'user_help';
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function rules()
+	{
+		return [
+			[['uid', 'stat_station', 'end_station'], 'required'],
+			[['uid'], 'integer'],
+			[['stat_station', 'end_station'], 'string', 'max' => 3],
+			[['train_no', 'seat_type'], 'string', 'max' => 11],
+		];
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'uid' => 'Uid',
+			'stat_station' => 'Stat Station',
+			'end_station' => 'End Station',
+			'train_no' => 'Train No',
+			'seat_type' => 'Seat Type',
+		];
+	}
+	
+	public function getUserHelp()
+	{
+		$a = self::tableName() . ' as a';
+		$b = UserInfo::tableName() . ' as b';
+		$res = (new Query())
+			->select(['uid', 'stat_station', 'end_station', 'train_no', 'seat_type', 'go_time', 'phone'])
+			->from($a)
+			->leftJoin($b, 'b.id = a.uid')
+			->where('go_time >= :go_time and status = 1', [':go_time' => time()])
+			->all();
+		return $res;
+	}
+	
+	public function changeStatus($user_id)
+	{
+		$user = Yii::$app->db->createCommand()->update(self::tableName(), ['status' => 0], ['uid' => $user_id])->execute();
+		return $user;
+	}
 }
