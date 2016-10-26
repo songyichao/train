@@ -44,4 +44,5 @@ class UserInfo extends \yii\db\ActiveRecord
             'phone' => 'Phone',
         ];
     }
+    
 }

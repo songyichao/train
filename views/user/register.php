@@ -23,17 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
 			'labelOptions' => ['class' => 'col-lg-1 control-label'],
 		],
 	]); ?>
-	
+	<input type="hidden" id="csrf" name="_csrf" value="X-CSRF-Token">
 	<?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 	
-	<?= $form->field($model, 'password')->passwordInput() ?>
+	<?= $form->field($model, 'phone')->textInput() ?>
 	
-	<?= $form->field($model, 'rememberMe')->checkbox([
-		'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-	]) ?>
+	<?= $form->field($model, 'vcode')->textInput() ?>
 	
 	<div class="form-group">
 		<div class="col-lg-offset-1 col-lg-11">
+			<?= Html::button('发送验证码', ['class' => 'btn btn-primary', 'id' => 'send']) ?>
 			<?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 			<?= Html::button('<a style="color:white" href="/user/index">Login</a>', ['class' => 'btn btn-primary', 'name' => 'a']) ?>
 		</div>
@@ -46,3 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		To modify the username/password, please check out the code <code>app\models\User::$users</code>.
 	</div>
 </div>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>

@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\models\LoginForm;
+use app\models\RegisterForm;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -16,6 +17,7 @@ use Yii;
 
 class UserController extends Controller
 {
+	public $enableCsrfValidation = false;
 	/**
 	 * @inheritdoc
 	 */
@@ -79,11 +81,29 @@ class UserController extends Controller
 	
 	public function actionRegister()
 	{
-		$model = new LoginForm();
+		$model = new RegisterForm();
 		$post = Yii::$app->request->post();
 		if (!$post) {
 			return $this->render('register', ['model' => $model]);
 		}
+		if ($model->load($post)) {
+			echo 1;
+			//			return $this->goBack();
+		}
+		var_dump($post);
+	}
+	
+	public function actionSend()
+	{
+		$data = Yii::$app->request->post();
+		$phone = $data['data'];
+		$code = '';
+		for ($i = 0; $i < 6; $i++) {
+			$code .= rand(0, 9);
+		}
+		Yii::$app->session['code'] = $phone . $code;
 		
+		return Yii::$app->session['code'];
+		return json_encode($data);
 	}
 }
