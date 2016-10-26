@@ -58,7 +58,11 @@ class UserController extends Controller
 		];
 	}
 	
-	public function actionLogin()
+	/**
+	 * 登录功能
+	 * @return string|\yii\web\Response
+	 */
+	public function actionIndex()
 	{
 		if (!Yii::$app->user->isGuest) {
 			return $this->goHome();
@@ -71,5 +75,15 @@ class UserController extends Controller
 		}
 		
 		return $this->render('login', ['model' => $model]);
+	}
+	
+	public function actionRegister()
+	{
+		$model = new LoginForm();
+		$post = Yii::$app->request->post();
+		if (!$post) {
+			return $this->render('register', ['model' => $model]);
+		}
+		
 	}
 }
