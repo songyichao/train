@@ -11,6 +11,7 @@ namespace app\commands;
 use app\models\Log;
 use app\models\StationCode;
 use app\models\UserHelp;
+use app\models\UserHope;
 use yii\console\Controller;
 use app\helps\Tools;
 
@@ -20,7 +21,7 @@ class TrainController extends Controller
 	{
 		$user_log = $user_id = [];
 		$url = 'https://kyfw.12306.cn/otn/leftTicket/queryC';
-		$user_help = (new UserHelp())->getUserHelp();
+		$user_help = (new UserHope())->getUserHelp();
 		if (!empty($user_help)) {
 			foreach ($user_help as $item) {
 				$data = [
@@ -70,7 +71,7 @@ class TrainController extends Controller
 				}
 			}
 			if (!empty($user_id)) {
-				(new UserHelp())->changeStatus($user_id);
+				(new UserHope())->changeStatus($user_id);
 				(new Log())->saveLog($user_log);
 			}
 		}

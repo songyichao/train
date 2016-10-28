@@ -15,14 +15,14 @@ use yii\db\Query;
  * @property string $train_no
  * @property string $seat_type
  */
-class UserHelp extends \yii\db\ActiveRecord
+class UserHope extends \yii\db\ActiveRecord
 {
 	/**
 	 * @inheritdoc
 	 */
 	public static function tableName()
 	{
-		return 'user_help';
+		return 'user_hope';
 	}
 	
 	/**
