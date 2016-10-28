@@ -31,9 +31,8 @@ class UserHelp extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['uid', 'stat_station', 'end_station'], 'required'],
+			[['uid', 'stat_station', 'end_station', 'go_time'], 'required'],
 			[['uid'], 'integer'],
-			[['stat_station', 'end_station'], 'string', 'max' => 3],
 			[['train_no', 'seat_type'], 'string', 'max' => 11],
 		];
 	}
