@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-httpclient": "^2.0",
-        "itsyc/yii2-taobao": "1.0.1.x-dev"
+        "itsyc/yii2-taobao": "1.0.1.x-dev",
+        "raulfraile/ladybug": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
