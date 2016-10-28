@@ -5,10 +5,11 @@ $('#send').click(function() {
 
     $.post('/user/send', {data : data}, function (result) {
         console.log(result);
-        if (result) {
-            // location.href = location.href;
+        if (result == true) {
+            $("#send").attr("disabled", true);
+            $('#send').text("已发送");
         } else {
-            alert('删除失败');
+            $('#send').text("发送验证码");
         }
     });
 });

@@ -8,8 +8,10 @@
 
 namespace app\controllers;
 
+use app\helps\Tools;
 use app\models\LoginForm;
 use app\models\RegisterForm;
+use app\models\UserInfo;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -18,6 +20,7 @@ use Yii;
 class UserController extends Controller
 {
 	public $enableCsrfValidation = false;
+	
 	/**
 	 * @inheritdoc
 	 */
@@ -67,13 +70,13 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		if (!Yii::$app->user->isGuest) {
-			return $this->goHome();
+			return $this->redirect('help');
 		}
 		
 		$model = new LoginForm();
 		
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->goBack();
+			return $this->render('login', ['model' => $model]);
 		}
 		
 		return $this->render('login', ['model' => $model]);
@@ -86,24 +89,21 @@ class UserController extends Controller
 		if (!$post) {
 			return $this->render('register', ['model' => $model]);
 		}
-		if ($model->load($post)) {
-			echo 1;
-			//			return $this->goBack();
+		if ($model->load($post) && $model->validate()) {
+			$model->register();
+//			(new UserInfo())->register();
+			return $this->redirect('index');
 		}
-		var_dump($post);
+		return $this->render('register', ['model' => $model]);
 	}
 	
 	public function actionSend()
 	{
 		$data = Yii::$app->request->post();
 		$phone = $data['data'];
-		$code = '';
-		for ($i = 0; $i < 6; $i++) {
-			$code .= rand(0, 9);
-		}
+		$code = Tools::code();
 		Yii::$app->session['code'] = $phone . $code;
-		
-		return Yii::$app->session['code'];
-		return json_encode($data);
+		$res = Tools::sendCode($phone, $code);
+		return json_encode($code);
 	}
 }

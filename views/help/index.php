@@ -7,38 +7,37 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Register';
+$this->title = 'Help';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
 	<h1><?= Html::encode($this->title) ?></h1>
 	
-	<p>Please fill out the following fields to login:</p>
+	<p>请输入你需要监控的车票信息</p>
 	
 	<?php $form = ActiveForm::begin([
-		'id' => 'register-form',
+		'id' => 'help',
+		'action' => 'help/save',
 		'options' => ['class' => 'form-horizontal'],
 		'fieldConfig' => [
 			'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
 			'labelOptions' => ['class' => 'col-lg-1 control-label'],
 		],
 	]); ?>
-	<input type="hidden" id="csrf" name="_csrf" value="X-CSRF-Token">
-	<?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 	
-	<?= $form->field($model, 'phone')->textInput() ?>
+	<?= $form->field($model, 'stat_station')->textInput(['autofocus' => true]) ?>
 	
-	<?= $form->field($model, 'vcode')->textInput() ?>
+	<?= $form->field($model, 'end_station')->textInput() ?>
 	
-	<?= $form->field($model, 'password')->passwordInput() ?>
+	<?= $form->field($model, 'go_time')->textInput(['onClick' => 'WdatePicker()']) ?>
 	
-	<?= $form->field($model, 'cf_password')->passwordInput() ?>
+	<?= $form->field($model, 'train_no')->textInput() ?>
+	
+	<?= $form->field($model, 'seat_type')->textInput() ?>
 	
 	<div class="form-group">
 		<div class="col-lg-offset-1 col-lg-11">
-			<?= Html::button('发送验证码', ['class' => 'btn btn-primary', 'id' => 'send']) ?>
-			<?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-			<?= Html::button('<a style="color:white" href="/user/index">Login</a>', ['class' => 'btn btn-primary', 'name' => 'a']) ?>
+			<?= Html::submitButton('提交', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 		</div>
 	</div>
 	
@@ -49,6 +48,4 @@ $this->params['breadcrumbs'][] = $this->title;
 		To modify the username/password, please check out the code <code>app\models\User::$users</code>.
 	</div>
 </div>
-
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/register.js"></script>
+<script language="javascript" type="text/javascript" src="/My97DatePicker/WdatePicker.js"></script>
