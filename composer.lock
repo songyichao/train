@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "09ff56b6860d343a4b04a71768164b0f",
-    "content-hash": "582a037d7a28cffde9e513ca72812ab2",
+    "hash": "d8f90ceb03424e18aa99541cfb1ed2ed",
+    "content-hash": "73f8bb4586108a367b3d705b896f898c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -298,6 +298,51 @@
                 "html"
             ],
             "time": "2016-07-16 12:58:58"
+        },
+        {
+            "name": "itsyc/yii2-taobao",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ITsyc/yii2-taobao.git",
+                "reference": "5ac5331fbe4ddbaea05536b27d4212304bd1cf8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/ITsyc/yii2-taobao/5ac5331fbe4ddbaea05536b27d4212304bd1cf8d.zip",
+                "reference": "5ac5331fbe4ddbaea05536b27d4212304bd1cf8d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\taobao\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Yichao Song",
+                    "email": "songyichao74@gmail.com"
+                }
+            ],
+            "description": "The taobao plugin for the Yii framework",
+            "keywords": [
+                "taobao",
+                "yii2"
+            ],
+            "time": "2016-10-26 15:45:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -950,7 +995,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "itsyc/yii2-taobao": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

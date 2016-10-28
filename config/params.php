@@ -14,4 +14,10 @@ return [
 		'硬座' => 'yz_num',
 		'无座' => 'wz_num',
 	],
+	'ali_dayu' =>[
+		'm_appkey' => '23463759',
+		'm_secretKey' => '072d43cc9d63ca7756d3fb182e03267b',
+		'm_sign_name' => '有票了',
+		'm_template_code' => 'SMS_22910019',
+	],
 ];

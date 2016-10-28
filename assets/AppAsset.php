@@ -22,6 +22,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
     ];
+	public $My97DatePicker = [
+	];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
