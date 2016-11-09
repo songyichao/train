@@ -11,6 +11,7 @@ namespace app\helps;
 use yii\httpclient\Client;
 use Yii;
 use yii\taobao\top\request\AlibabaAliqinFcSmsNumSendRequest;
+use yii\taobao\top\request\AlibabaAliqinFcTtsNumSinglecallRequest;
 use yii\taobao\top\TopClient;
 use yii\taobao\Autoloader;
 use yii\taobao\TopSdk;
@@ -58,6 +59,25 @@ class Tools
 //		}
 		return false;
 		return true;
+	}
+	
+	public static function callToUser($phone)
+	{
+		TopSdk::set();
+		$taobao = new Autoloader();
+		$c = new TopClient();
+		$c->appkey = Yii::$app->params['ali_dayu']['m_appkey'];
+		$c->secretKey = Yii::$app->params['ali_dayu']['m_secretKey'];
+		$req = new AlibabaAliqinFcTtsNumSinglecallRequest();
+		$req ->setTtsParam('');
+		$req ->setCalledNum($phone);
+		$req ->setCalledShowNum(Yii::$app->params['ali_dayu']['t_show_num']);
+		$req ->setTtsCode(Yii::$app->params['ali_dayu']['t_template_code']);
+		$resp = json_decode(json_encode($c->execute($req)), true);
+		if (isset($resp['result']['err_code']) && $resp['result']['err_code'] === '0') {
+			return true;
+		}
+		return false;
 	}
 	
 	public static function code()

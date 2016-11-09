@@ -36,12 +36,18 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-//            ['label' => 'Home', 'url' => ['/site/index']],
-//            ['label' => 'About', 'url' => ['/site/about']],
-//            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => '添加我的余票监控', 'url' => ['/hope/save']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/index']]
             ) : (
+                '<li>'
+                . Html::beginForm(['/user/logout'], 'post', ['class' => 'navbar-form'])
+                . Html::submitButton(
+                    '个人中心',
+                    ['class' => 'btn btn-link']
+                )
+                . Html::endForm()
+                . '</li>'.
                 '<li>'
                 . Html::beginForm(['/user/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
