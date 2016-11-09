@@ -18,6 +18,8 @@ return [
 		'm_appkey' => '234637591', //你自己的阿里大鱼key
 		'm_secretKey' => '072d43cc9d63ca7756d3fb182e03267b1', //你自己的阿里大鱼key
 		'm_sign_name' => '有票了',
-		'm_template_code' => 'SMS_22910019',
+		'm_template_code' => 'SMS_229100191',
+		't_show_num' => '0514820432721',
+		't_template_code' => 'TTS_160850181',
 	],
 ];
