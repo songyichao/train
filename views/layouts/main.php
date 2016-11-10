@@ -41,7 +41,7 @@ AppAsset::register($this);
                 ['label' => 'Login', 'url' => ['/user/index']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/user/logout'], 'post', ['class' => 'navbar-form'])
+                . Html::beginForm(['/hope/log'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
                     '个人中心',
                     ['class' => 'btn btn-link']

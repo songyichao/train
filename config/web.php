@@ -3,6 +3,7 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+	'timeZone'=>'Asia/Chongqing',
     'id' => 'basic',
 	'defaultRoute' => 'user',
 	'basePath' => dirname(__DIR__),

@@ -32,7 +32,7 @@ class HopeController extends Controller
 				'only' => ['logout'],
 				'rules' => [
 					[
-						'actions' => ['logout','save'],
+						'actions' => ['logout', 'save'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
@@ -79,7 +79,7 @@ class HopeController extends Controller
 				$data[$k]['seat_type'] = !empty($item['seat_type']) ? $seat_type[$item['seat_type']] : null;
 			}
 		}
-
+		
 		return $this->render('index', ['data' => $data]);
 	}
 	
@@ -94,7 +94,7 @@ class HopeController extends Controller
 		}
 		$model = new UserHope();
 		$data = Yii::$app->request->post();
-		if (!$data){
+		if (!$data) {
 			return $this->render('save', ['model' => $model]);
 		}
 		if ($model->load($data) && $model->validate() && $model->saveHope($data['UserHope'])) {
@@ -121,21 +121,28 @@ class HopeController extends Controller
 						$stat_station = $station[$item['stat_station']];
 						$end_station = $station[$item['end_station']];
 						$seat_type = empty($item['seat_type']) ? null : Yii::$app->params['seat_type'][$item['seat_type']];
-						$go_time = date('Y-m-d',$item['go_time']);
+						$go_time = date('Y-m-d', $item['go_time']);
 					}
 				}
+				
+				$train_str = '';
+				if (!empty($hope_re['train_no'])) {
+					$train = json_decode($hope_re['train_no']);
+					$train_str = substr(implode(',', $train), 0, 20) . '...';
+				}
+				
 				$data[] = [
+					'ctime' => date('Y-m-d h:i:s', $hope_re['ctime']),
 					'stat_station' => $stat_station,
 					'end_station' => $end_station,
-					'seat_type' => $seat_type,
+					'seat_type' => $seat_type ?? '无',
 					'go_time' => $go_time,
-					'train' => $hope_re['train_no'],
+					'train_no' => empty($item['train_no']) ? '无' : $item['train_no'],
+					'train' => $train_str
 				];
 			}
+			ArrayHelper::multisort($data, 'ctime', SORT_DESC);
 		}
-		$ladybug = new Dumper();
-		echo $ladybug->dump($data);
-		exit;
 		return $this->render('log', ['data' => $data]);
 	}
 }
