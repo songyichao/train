@@ -15,11 +15,11 @@ return [
 		'无座' => 'wz_num',
 	],
 	'ali_dayu' =>[
-		'm_appkey' => '234637591', //你自己的阿里大鱼key
-		'm_secretKey' => '072d43cc9d63ca7756d3fb182e03267b1', //你自己的阿里大鱼key
+		'm_appkey' => '234***591', //你自己的阿里大鱼key
+		'm_secretKey' => '072d43cc9d63ca775***fb182e03267b1', //你自己的阿里大鱼key
 		'm_sign_name' => '有票了',
-		'm_template_code' => 'SMS_229100191',
-		't_show_num' => '0514820432721',
-		't_template_code' => 'TTS_160850181',
+		'm_template_code' => 'SMS_229***191',
+		't_show_num' => '05148204***21',
+		't_template_code' => 'TTS_1608***81',
 	],
 ];
