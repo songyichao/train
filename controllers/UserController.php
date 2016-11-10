@@ -70,18 +70,22 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		if (!Yii::$app->user->isGuest) {
-			return $this->redirect('help');
+			return $this->redirect('hope');
 		}
 		
 		$model = new LoginForm();
 		
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->render('login', ['model' => $model]);
+			return $this->redirect('hope');
 		}
 		
 		return $this->render('login', ['model' => $model]);
 	}
 	
+	/**
+	 * 实现注册功能
+	 * @return string|\yii\web\Response
+	 */
 	public function actionRegister()
 	{
 		$model = new RegisterForm();
@@ -91,12 +95,15 @@ class UserController extends Controller
 		}
 		if ($model->load($post) && $model->validate()) {
 			$model->register();
-//			(new UserInfo())->register();
 			return $this->redirect('index');
 		}
 		return $this->render('register', ['model' => $model]);
 	}
 	
+	/**
+	 * 发送短信验证码
+	 * @return mixed|string|void
+	 */
 	public function actionSend()
 	{
 		$data = Yii::$app->request->post();
@@ -105,5 +112,12 @@ class UserController extends Controller
 		Yii::$app->session['code'] = $phone . $code;
 		$res = Tools::sendCode($phone, $code);
 		return json_encode($code);
+	}
+	
+	public function actionLogout()
+	{
+		Yii::$app->user->logout();
+		
+		return $this->goHome();
 	}
 }

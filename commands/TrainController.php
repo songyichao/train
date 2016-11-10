@@ -10,7 +10,8 @@ namespace app\commands;
 
 use app\models\Log;
 use app\models\StationCode;
-use app\models\UserHelp;
+use app\models\UserHope;
+use Ladybug\Dumper;
 use yii\console\Controller;
 use app\helps\Tools;
 
@@ -19,8 +20,8 @@ class TrainController extends Controller
 	public function actionIndex()
 	{
 		$user_log = $user_id = [];
-		$url = 'https://kyfw.12306.cn/otn/leftTicket/queryC';
-		$user_help = (new UserHelp())->getUserHelp();
+		$url = 'https://kyfw.12306.cn/otn/leftTicket/queryX';
+		$user_help = (new UserHope())->getUserHope();
 		if (!empty($user_help)) {
 			foreach ($user_help as $item) {
 				$data = [
@@ -33,7 +34,10 @@ class TrainController extends Controller
 				if ($response !== false) {
 					$res = json_decode($response, true);
 					$can_buy = [];
-					foreach ($res as $re) {
+					$ladybug = new Dumper();
+					//					echo  $ladybug->dump($res);
+					//					exit;
+					foreach ($res['data'] as $re) {
 						if (!empty($item['train_no']) && $re['queryLeftNewDTO']['station_train_code'] === $item['train_no']
 							&& $re['queryLeftNewDTO']['canWebBuy'] === 'Y'
 						) {
@@ -50,19 +54,21 @@ class TrainController extends Controller
 						) {
 							$can_buy[] = $re['queryLeftNewDTO']['station_train_code'];
 						}
-						if (empty($item['seat_type']) && empty($item['seat_type'])) {
+						if (empty($item['seat_type']) && empty($item['train_no'])) {
+							
 							if ($re['queryLeftNewDTO']['canWebBuy'] === 'Y') {
 								$can_buy[] = $re['queryLeftNewDTO']['station_train_code'];
 							}
 						}
 					}
 					if (!empty($can_buy)) {
-						Tools::callToUser($item['phone'], $can_buy);
+						$call_res = Tools::callToUser($item['phone']);
 						$user_id[] = $item['uid'];
 						$user_log[] = [
-							'uid' => $item['uid'],
+							'hid' => $item['hid'],
 							'train_no' => json_encode($can_buy),
-							'status' => empty($can_buy) ? 0 : 1,
+							'buy_status' => empty($can_buy) ? 0 : 1,
+							'call_status' => $call_res ? 1 : 0,
 							'ctime' => time(),
 						];
 						
@@ -70,7 +76,9 @@ class TrainController extends Controller
 				}
 			}
 			if (!empty($user_id)) {
-				(new UserHelp())->changeStatus($user_id);
+				if ($call_res) {
+					(new UserHope())->changeStatus($user_id);
+				}
 				(new Log())->saveLog($user_log);
 			}
 		}

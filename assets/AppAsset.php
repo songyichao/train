@@ -18,11 +18,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
     ];
     public $js = [
     ];
 	public $My97DatePicker = [
+	];
+	public $AmazeUI = [
+		'css/site.css',
 	];
     public $depends = [
         'yii\web\YiiAsset',

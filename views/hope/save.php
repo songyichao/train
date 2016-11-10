@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Help';
+$this->title = 'Hope';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -16,8 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>请输入你需要监控的车票信息</p>
 	
 	<?php $form = ActiveForm::begin([
-		'id' => 'help',
-		'action' => 'help/save',
+		'id' => 'hope-save',
 		'options' => ['class' => 'form-horizontal'],
 		'fieldConfig' => [
 			'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
