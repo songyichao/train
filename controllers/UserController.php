@@ -70,13 +70,13 @@ class UserController extends Controller
 	public function actionIndex()
 	{
 		if (!Yii::$app->user->isGuest) {
-			return $this->redirect('hope');
+			return $this->redirect('/hope');
 		}
 		
 		$model = new LoginForm();
 		
 		if ($model->load(Yii::$app->request->post()) && $model->login()) {
-			return $this->redirect('hope');
+			return $this->redirect('/hope');
 		}
 		
 		return $this->render('login', ['model' => $model]);

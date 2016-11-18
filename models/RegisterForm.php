@@ -56,7 +56,7 @@ class RegisterForm extends Model
 	
 	public function register()
 	{
-		$model = new UserInfo();
+		$model = new User();
 		$model->username = $this->username;
 		$model->phone = $this->phone;
 		$model->password = md5($this->password);
