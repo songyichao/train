@@ -57,4 +57,5 @@ crontab -e
 
 00 06 * * * cd /search/service/nginx/html/train && php70 yii train/index > /search/service/nginx/html/train/runtime/train/`date +"\%Y\%m\%d"`
 
+**这里的`php70`是我的PHP版本，届时需要换成自己本地的`PHP版本`**
 这个项目就可运行起来了，但是由于调用接口所产生的问题会导致某些时候不能获得想要的数据，所以可不可通就只能听天由命了
