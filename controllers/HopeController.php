@@ -122,6 +122,7 @@ class HopeController extends Controller
 						$end_station = $station[$item['end_station']];
 						$seat_type = empty($item['seat_type']) ? null : Yii::$app->params['seat_type'][$item['seat_type']];
 						$go_time = date('Y-m-d', $item['go_time']);
+						$train_no = empty($item['train_no']) ? '无' : $item['train_no'];
 					}
 				}
 				
@@ -137,7 +138,7 @@ class HopeController extends Controller
 					'end_station' => $end_station,
 					'seat_type' => $seat_type ?? '无',
 					'go_time' => $go_time,
-					'train_no' => empty($item['train_no']) ? '无' : $item['train_no'],
+					'train_no' => $train_no,
 					'train' => $train_str
 				];
 			}

@@ -41,24 +41,23 @@ class Tools
 	
 	public static function sendCode($phone, $code)
 	{
-//		TopSdk::set();
-//		$taobao = new Autoloader();
-//		$c = new TopClient();
-//		$c->appkey = Yii::$app->params['ali_dayu']['m_appkey'];
-//		$c->secretKey = Yii::$app->params['ali_dayu']['m_secretKey'];
-//		$req = new AlibabaAliqinFcSmsNumSendRequest();
-//		$req->setExtend("123456");
-//		$req->setSmsType("normal");
-//		$req->setSmsFreeSignName(Yii::$app->params['ali_dayu']['m_sign_name']);
-//		$req->setSmsParam("{\"code\":\"$code\"}");
-//		$req->setRecNum($phone);
-//		$req->setSmsTemplateCode(Yii::$app->params['ali_dayu']['m_template_code']);
-//		$resp = json_decode(json_encode($c->execute($req)), true);
-//		if (isset($resp['result']['err_code']) && $resp['result']['err_code'] === '0') {
-//			return true;
-//		}
+		TopSdk::set();
+		$taobao = new Autoloader();
+		$c = new TopClient();
+		$c->appkey = Yii::$app->params['ali_dayu']['m_appkey'];
+		$c->secretKey = Yii::$app->params['ali_dayu']['m_secretKey'];
+		$req = new AlibabaAliqinFcSmsNumSendRequest();
+		$req->setExtend("123456");
+		$req->setSmsType("normal");
+		$req->setSmsFreeSignName(Yii::$app->params['ali_dayu']['m_sign_name']);
+		$req->setSmsParam("{\"code\":\"$code\"}");
+		$req->setRecNum($phone);
+		$req->setSmsTemplateCode(Yii::$app->params['ali_dayu']['m_template_code']);
+		$resp = json_decode(json_encode($c->execute($req)), true);
+		if (isset($resp['result']['err_code']) && $resp['result']['err_code'] === '0') {
+			return true;
+		}
 		return false;
-		return true;
 	}
 	
 	public static function callToUser($phone)
