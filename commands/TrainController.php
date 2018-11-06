@@ -20,7 +20,7 @@ class TrainController extends Controller
 	public function actionIndex()
 	{
 		$user_log = $user_id = [];
-		$url = 'https://kyfw.12306.cn/otn/leftTicket/queryX';
+		$url = 'https://kyfw.12306.cn/otn/leftTicket/query';
 		$user_help = (new UserHope())->getUserHope();
 		if (!empty($user_help)) {
 			foreach ($user_help as $item) {
